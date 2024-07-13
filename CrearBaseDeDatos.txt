@@ -1,0 +1,9 @@
+docker pull gvenzl/oracle-xe
+docker run -d --name oracle_xe -p 1521:1521 -e ORACLE_PASSWORD=password gvenzl/oracle-xe
+docker logs oracle_xe
+docker exec -it oracle_xe bash
+sqlplus sys as sysdba
+CREATE USER inventory_manager IDENTIFIED BY password2;
+GRANT CONNECT, RESOURCE, DBA TO inventory_manager;
+ALTER USER inventory_manager QUOTA UNLIMITED ON USERS;
+CONNECT inventory_manager/password2
